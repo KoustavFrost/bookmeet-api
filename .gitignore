@@ -16,3 +16,4 @@ build
 **/.firebaserc
 */npm-debug.log
 **/package-lock.json
+yarn.lock

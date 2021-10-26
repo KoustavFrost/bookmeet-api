@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "8961252c-ef7f-4eff-a391-9ac49442d63c",
+		"name": "bookmeet-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Google Sign In",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjhmYmRmMjQxZTdjM2E2NTEzNTYwNmRkYzFmZWQyYzU1MjI2MzBhODciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTWFpbmFrIER1dHRhIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BT2gxNEdnaWJPeDRWLUhYdkdpYkJMYkdVaUJDcFR1VXNQVnpKSUdaSWIySlh3PXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2Jvb2ttZWV0LWI0NDU1IiwiYXVkIjoiYm9va21lZXQtYjQ0NTUiLCJhdXRoX3RpbWUiOjE2MzUyMzE3MTQsInVzZXJfaWQiOiJqT29VdXpyQjhLVkdEWTVhYXZlMnJJNUs5SjkzIiwic3ViIjoiak9vVXV6ckI4S1ZHRFk1YWF2ZTJySTVLOUo5MyIsImlhdCI6MTYzNTI2NjkyNywiZXhwIjoxNjM1MjcwNTI3LCJlbWFpbCI6ImR1dHRhLm1haW5hazI1NkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjEwNjEzMTQ4NjA4OTM0ODYxOTUyMSJdLCJlbWFpbCI6WyJkdXR0YS5tYWluYWsyNTZAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.Nodvms563GWG9fVAKLgipOkKgoOp2Tv5TpLcTywX2DI7KGofKqQTRGfre2aqFCHVlq-AJwc1v1Sp4o48P4CbJOFGL4bsZvAM3gTsvKzlZ0SNbhaY_8qFOeXC_nHetm8Td01WXdMNhietHZtKPM_JaB2z2x2QWxZFrn2-iS5mWF3CbAAiN6MUZQUTUg-OI4D-HsF0CbIw0R314HVAzr-xcNAah9PtPnuvABNZZUHFBJJiUIme_jOBPpY2d_rw5CmPxmveW3tFoFSlFIjQweoRjf23Ub4M0V8G2kDE08J30V9GotPDfSraMd854q4UAnURf8orhiZjBMVttnzijkjKrA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjhmYmRmMjQxZTdjM2E2NTEzNTYwNmRkYzFmZWQyYzU1MjI2MzBhODciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTWFpbmFrIER1dHRhIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BT2gxNEdnaWJPeDRWLUhYdkdpYkJMYkdVaUJDcFR1VXNQVnpKSUdaSWIySlh3PXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2Jvb2ttZWV0LWI0NDU1IiwiYXVkIjoiYm9va21lZXQtYjQ0NTUiLCJhdXRoX3RpbWUiOjE2MzUyMzE3MTQsInVzZXJfaWQiOiJqT29VdXpyQjhLVkdEWTVhYXZlMnJJNUs5SjkzIiwic3ViIjoiak9vVXV6ckI4S1ZHRFk1YWF2ZTJySTVLOUo5MyIsImlhdCI6MTYzNTI2NjkyNywiZXhwIjoxNjM1MjcwNTI3LCJlbWFpbCI6ImR1dHRhLm1haW5hazI1NkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjEwNjEzMTQ4NjA4OTM0ODYxOTUyMSJdLCJlbWFpbCI6WyJkdXR0YS5tYWluYWsyNTZAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.Nodvms563GWG9fVAKLgipOkKgoOp2Tv5TpLcTywX2DI7KGofKqQTRGfre2aqFCHVlq-AJwc1v1Sp4o48P4CbJOFGL4bsZvAM3gTsvKzlZ0SNbhaY_8qFOeXC_nHetm8Td01WXdMNhietHZtKPM_JaB2z2x2QWxZFrn2-iS5mWF3CbAAiN6MUZQUTUg-OI4D-HsF0CbIw0R314HVAzr-xcNAah9PtPnuvABNZZUHFBJJiUIme_jOBPpY2d_rw5CmPxmveW3tFoFSlFIjQweoRjf23Ub4M0V8G2kDE08J30V9GotPDfSraMd854q4UAnURf8orhiZjBMVttnzijkjKrA",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"dutta.mainak256@gmail.com\",\r\n    \"uid\": \"jOoUuzrB8KVGDY5aave2rI5K9J93\",\r\n    \"name\": \"Mainak Dutta\",\r\n    \"photoUrl\": \"https://lh3.googleusercontent.com/a-/AOh14GgibOx4V-HXvGibBLbGUiBCpTuUsPVzJIGZIb2JXw=s96-c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/googlesignin",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"googlesignin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Demo",
+			"item": [
+				{
+					"name": "Demo API",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/demo/noauth",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"demo",
+								"noauth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://localhost:3000/api"
+		}
+	]
+}

