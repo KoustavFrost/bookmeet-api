@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "bookmeet-api",
   "version": "1.0.0",
-  "description": "NodeJS ExpressJS API boilerpalte in Typescript",
+  "description": "API for the product bookmeet",
   "main": "src/app.ts",
   "scripts": {
     "build": "npm-run-all clean tsc copy-assets",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:arghyac35/api_boilerplate.git"
+    "url": "git+ssh://git@github.com:KoustavFrost/bookmeet-api.git"
   },
   "keywords": [
     "js",
@@ -28,7 +28,7 @@
     "node",
     "express"
   ],
-  "author": "Arghya Chanda",
+  "author": "Koustav Pal",
   "license": "MIT",
   "dependencies": {
     "argon2": "^0.28.2",
@@ -85,10 +85,10 @@
     "typescript": "^4.3.5"
   },
   "bugs": {
-    "url": "https://github.com/arghyac35/api_boilerplate/issues"
+    "url": "https://github.com/KoustavFrost/bookmeet-api/issues"
   },
-  "homepage": "https://github.com/arghyac35/api_boilerplate#readme",
+  "homepage": "https://github.com/KoustavFrost/bookmeet-api#readme",
   "engines": {
-    "node": "16.x"
+    "node": ">=16.10.0"
   }
 }

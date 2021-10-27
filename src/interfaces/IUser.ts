@@ -7,7 +7,7 @@ export interface IUser {
   image: string;
   googleId: string;
   firebaseToken: string;
-  location?: { state: string, country: DefaultCountry }[];
+  location: { state: string, country: DefaultCountry.INDIA };
   role: Roles;
   status: ActiveStatus;
   lastLogin: Date;
@@ -20,7 +20,7 @@ export interface IUserInputDTO {
   image: string;
   googleId: string;
   firebaseToken: string;
-  location?: { state: string, country: DefaultCountry }[];
+  location: { state: string, country: DefaultCountry.INDIA };
   role: Roles;
   status: ActiveStatus;
   lastLogin: Date;

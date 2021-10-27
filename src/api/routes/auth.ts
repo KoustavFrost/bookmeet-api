@@ -12,7 +12,7 @@ export default (app: Router) => {
   app.use('/auth', route);
 
   route.post(
-    '/googlesignin',
+    '/userauthentication',
     middlewares.firebaseIsAuth,
     async (req: Request, res: Response, next: NextFunction) => {
       const logger: Logger = Container.get('logger');

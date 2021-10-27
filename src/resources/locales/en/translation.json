@@ -1,5 +1,6 @@
 {
   "signInSuccess": "Signed in successfully",
-  "userCreationFailed": "User cannot be created",
-  "inactiveAccount": "You'r account is disabled by administrator."
+  "userCreationFailed": "User cannot be created.",
+  "inactiveAccount": "You'r account is disabled by administrator.",
+  "emailOrUidError": "Some error has occured regarding the validation of email."
 }

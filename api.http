@@ -4,7 +4,7 @@ content-type: application/json
 {
   "name": "aaa",
   "password": "aaa",
-  "email": "arghyac35@gmail.com"
+  "email": "kv.pal9@gmail.com"
 }
 
 ###
@@ -14,7 +14,7 @@ content-type: application/json
 
 {
   "password": "aaa",
-  "email": "arghyac35@gmail.com",
+  "email": "kv.pal9@gmail.com",
   "role": "user"
 }
 

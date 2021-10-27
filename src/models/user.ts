@@ -7,7 +7,6 @@ const User = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, 'Please enter a full name'],
       index: true,
     },
     email: {
@@ -20,13 +19,13 @@ const User = new mongoose.Schema(
     image: String,
     googleId: String,
     firebaseToken: String,
-    location: [{
+    location: {
       state: String,
       country: {
         type: String,
         default: DefaultCountry.INDIA
       }
-    }],
+    },
     role: {
       type: String,
       default: Roles.USER
