@@ -1,0 +1,39 @@
+booksmeet datamodel
+------------------------------------------------------------------------
+Note: This is just a text file, where we will maintain the datamodel of our application. All the popular tools are paid and we cannot afford it.
+------------------------------------------------------------------------
+
+
+CollectionName: users
+------------------------------------------------------------------------
+name: string
+email: string
+phoneNo: string
+image: string
+googleId: string
+firebaseToken: string
+location: {
+  state: string
+  country: string
+}
+role: enum (user, superadmin)
+isActive: true/false
+status: string
+lastLogin
+
+
+CollectionName: listings
+------------------------------------------------------------------------
+userId: fk
+name: string
+author: string
+genre: array
+publisher: string
+isbn: string
+synopsys: string
+condition: enum (mint, very good, good, rough)
+images: array
+status: {
+  status: enum(active, inactive, shared, removed)
+  reason: string
+}

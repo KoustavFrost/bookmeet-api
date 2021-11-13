@@ -1,7 +1,7 @@
 import { IUser } from '../interfaces/IUser';
 import mongoose from 'mongoose';
-import { DefaultCountry, Roles, ActiveStatus } from '../config/constants';
-mongoose.set("useFindAndModify", false);
+import { DefaultCountry, Roles } from '../config/constants';
+mongoose.set('useFindAndModify', false);
 
 const User = new mongoose.Schema(
   {
@@ -23,18 +23,19 @@ const User = new mongoose.Schema(
       state: String,
       country: {
         type: String,
-        default: DefaultCountry.INDIA
-      }
+        default: DefaultCountry.INDIA,
+      },
     },
     role: {
       type: String,
-      default: Roles.USER
+      default: Roles.USER,
     },
-    status: {
-      type: String,
-      default: ActiveStatus.ACTIVE
+    isActive: {
+      type: Boolean,
+      default: true,
     },
-    lastLogin: Date
+    status: String,
+    lastLogin: Date,
   },
   { timestamps: true },
 );

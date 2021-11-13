@@ -1,4 +1,4 @@
-import { Roles, DefaultCountry, ActiveStatus } from '../config/constants';
+import { Roles, DefaultCountry } from '../config/constants';
 export interface IUser {
   _id: string;
   name: string;
@@ -7,9 +7,10 @@ export interface IUser {
   image: string;
   googleId: string;
   firebaseToken: string;
-  location: { state: string, country: DefaultCountry.INDIA };
+  location: { state: string; country: DefaultCountry.INDIA };
   role: Roles;
-  status: ActiveStatus;
+  isActive: boolean;
+  status: string;
   lastLogin: Date;
 }
 
@@ -20,8 +21,9 @@ export interface IUserInputDTO {
   image: string;
   googleId: string;
   firebaseToken: string;
-  location: { state: string, country: DefaultCountry.INDIA };
+  location: { state: string; country: DefaultCountry.INDIA };
   role: Roles;
-  status: ActiveStatus;
+  isActive: boolean;
+  status: string;
   lastLogin: Date;
 }
