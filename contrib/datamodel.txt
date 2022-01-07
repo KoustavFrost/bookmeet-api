@@ -37,3 +37,8 @@ status: {
   status: enum(active, inactive, shared, removed)
   reason: string
 }
+location: {
+  city: string
+  state: string
+  country: string
+}

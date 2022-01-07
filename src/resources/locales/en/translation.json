@@ -2,5 +2,8 @@
   "signInSuccess": "Signed in successfully",
   "userCreationFailed": "User cannot be created.",
   "inactiveAccount": "You'r account is disabled by administrator.",
-  "emailOrUidError": "Some error has occured regarding the validation of email."
+  "emailOrUidError": "Some error has occured regarding the validation of email.",
+  "userDoesNotExists": "This user does not exists.",
+  "updatedUser": "Profile data updated successfully.",
+  "removedProfileImage": "Profile picture removed successfully."
 }
