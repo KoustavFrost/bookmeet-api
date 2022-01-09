@@ -1,13 +1,26 @@
 export enum DefaultCountry {
-  INDIA = 'india'
+  INDIA = 'india',
 }
 
 export enum Roles {
   USER = 'user',
-  SUPERADMIN = 'superadmin'
+  SUPERADMIN = 'superadmin',
 }
 
 export enum ActiveStatus {
   ACTIVE = 'active',
-  INACTIVE = 'inactive'
+  INACTIVE = 'inactive',
+}
+
+export enum BookConditions {
+  EXCELENT = 'excelent',
+  GOOD = 'good',
+  FAIR = 'fair',
+}
+
+export enum ListingStatus {
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+  SHARED = 'shared',
+  REMOVED = 'removed',
 }
