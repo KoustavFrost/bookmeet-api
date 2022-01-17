@@ -55,21 +55,20 @@ const Listing = new Schema(
       reason: {
         type: String,
         required: true,
+        default: 'This listing is active.',
       },
     },
-    location: {
-      city: {
-        required: true,
-        type: String,
-      },
-      state: {
-        required: true,
-        type: String,
-      },
-      country: {
-        type: String,
-        default: 'india',
-      },
+    city: {
+      required: true,
+      type: String,
+    },
+    state: {
+      required: true,
+      type: String,
+    },
+    country: {
+      type: String,
+      default: 'india',
     },
   },
   { timestamps: true },

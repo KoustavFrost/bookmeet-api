@@ -15,11 +15,9 @@ export interface IListing {
     status: ListingStatus;
     reason: string;
   };
-  location: {
-    city: string;
-    state: string;
-    country: string;
-  };
+  city: string;
+  state: string;
+  country: string;
 }
 
 export interface IListingInputDTO {
@@ -28,17 +26,9 @@ export interface IListingInputDTO {
   genre: [];
   publisher: string;
   isbn: string;
-  synopsys: string;
-  language: string;
+  synopsys?: string;
+  language?: string;
   condition: BookConditions;
-  images: [];
-  status: {
-    status: ListingStatus;
-    reason: string;
-  };
-  location: {
-    city: string;
-    state: string;
-    country: string;
-  };
+  city: string;
+  state: string;
 }

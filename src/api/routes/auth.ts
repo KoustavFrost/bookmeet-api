@@ -3,7 +3,7 @@ import { Container } from 'typedi';
 import AuthService from '../../services/auth';
 import { IUserInputDTO } from '../../interfaces/IUser';
 import middlewares from '../middlewares';
-import { celebrate, Joi } from 'celebrate';
+import { celebrate, Joi, Segments } from 'celebrate';
 import { Logger } from 'winston';
 
 const route = Router();
@@ -13,6 +13,15 @@ export default (app: Router) => {
 
   route.post(
     '/userauthentication',
+    celebrate({
+      [Segments.HEADERS]: Joi.object({
+        authorization: Joi.string().required(),
+      }).unknown(),
+      [Segments.BODY]: Joi.object({
+        email: Joi.string().required(),
+        uid: Joi.string().required(),
+      }),
+    }),
     middlewares.firebaseIsAuth,
     async (req: Request, res: Response, next: NextFunction) => {
       const logger: Logger = Container.get('logger');

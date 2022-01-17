@@ -5,5 +5,10 @@
   "emailOrUidError": "Some error has occured regarding the validation of email.",
   "userDoesNotExists": "This user does not exists.",
   "updatedUser": "Profile data updated successfully.",
-  "removedProfileImage": "Profile picture removed successfully."
+  "removedProfileImage": "Profile picture removed successfully.",
+  "listing": {
+    "create": "Listing created successfully.",
+    "error": "An error has occured.",
+    "landing": "Listings for the landing page has been fetched successfully."
+  }
 }
