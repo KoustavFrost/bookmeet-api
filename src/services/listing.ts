@@ -65,7 +65,22 @@ export default class ListingService extends CommonService {
       return { listings, message: i18next.t('listing.landing') };
     } catch (error) {
       this.logger.error(error);
-      this.endPerformanceLogging('Create strain');
+      this.endPerformanceLogging('Get landing page listing');
+      throw error;
+    }
+  }
+
+  public async getListingById(id: string): Promise<{ listing: IListing; message: string }> {
+    this.logger.info('==== Fetching listing by id ====');
+    this.startPerformanceLogging();
+
+    try {
+      let listing: IListing = await this.listingModel.findById(id);
+
+      return { listing, message: 'OK' };
+    } catch (error) {
+      this.logger.error(error);
+      this.endPerformanceLogging('Get listing by id');
       throw error;
     }
   }

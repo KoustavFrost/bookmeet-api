@@ -62,4 +62,33 @@ export default (app: Router) => {
       return next(e);
     }
   });
+
+  // Route to get listing by listing id
+  route.get(
+    '/getlisting/:id',
+    celebrate({
+      [Segments.PARAMS]: Joi.object({
+        id: Joi.required().messages({
+          'required.base': `Please pass a listing id`,
+        }),
+      }),
+    }),
+
+    middlewares.isAuth,
+    middlewares.attachCurrentUser,
+    async (req: Request, res: Response, next: NextFunction) => {
+      const logger: Logger = Container.get('logger');
+      logger.info('In fetching listing details by listing id --> %o', req.params);
+      try {
+        const { id } = req.params;
+        const listingServiceInstance = Container.get(ListingService);
+        const { listing, message } = await listingServiceInstance.getListingById(id);
+
+        return res.json({ listing, message }).status(200);
+      } catch (e) {
+        logger.error('🔥 error: %o', e);
+        return next(e);
+      }
+    },
+  );
 };
