@@ -5,6 +5,7 @@ import { Logger } from 'winston';
 import { celebrate, Joi, Segments } from 'celebrate';
 import ListingService from '../../services/listing';
 import { IListingInputDTO } from '../../interfaces/IListing';
+import commonValidators from '../../validators/commonValidators';
 
 const route = Router();
 
@@ -24,6 +25,11 @@ export default (app: Router) => {
       // console.log(req.body);
 
       try {
+        // Required fields
+        const requiredFields: string[] = ['name', 'author', 'genre', 'publisher', 'isbn', 'condition', 'city', 'state'];
+        // Validation
+        commonValidators.objectValidator(req.body, requiredFields as string[]);
+
         const images: string[] = [];
         if (req.files) {
           // User has uploaded images
