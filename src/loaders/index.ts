@@ -23,10 +23,14 @@ export default async ({ expressApp }) => {
     model: require('../models/user').default,
   };
 
+  const listingModel = {
+    name: 'listingModel',
+    // Notice the require syntax and the '.default'
+    model: require('../models/listing').default,
+  };
+
   await dependencyInjectorLoader({
-    models: [
-      userModel
-    ],
+    models: [userModel, listingModel],
   });
   Logger.info('✌️ Dependency Injector loaded');
 

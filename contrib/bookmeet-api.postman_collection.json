@@ -10,13 +10,25 @@
 			"item": [
 				{
 					"name": "Google Sign In",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data=pm.response.json();",
+									"pm.environment.set(\"access_token\",data.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjY5NGNmYTAxOTgyMDNlMjgwN2Q4MzRkYmE2MjBlZjczZjI4ZTRlMmMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYm9va21lZXQtYjQ0NTUiLCJhdWQiOiJib29rbWVldC1iNDQ1NSIsImF1dGhfdGltZSI6MTYzNjU1NTU3MSwidXNlcl9pZCI6IlBoUWxvTTJDZXNVa0RMTk41N0w3d0Zta01aeTIiLCJzdWIiOiJQaFFsb00yQ2VzVWtETE5ONTdMN3dGbWtNWnkyIiwiaWF0IjoxNjM2NTU1NTcxLCJleHAiOjE2MzY1NTkxNzEsImVtYWlsIjoia3YucGFsOUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsia3YucGFsOUBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.FxqMgDJUrbIrbocnMEbnYrWLR3X9rSxYPiEU0gQ0eGqDK3Aly6ktGUgeuXa0vSpPFctSjnVLXUcSkRg5OqM8aIH7s5HVtCuDqDoUTLlFVhDRutIVi8wkjltGsMjHgF-lbDMFikD0rdNIjueOxUbMVe-Z8iXHrop8DUMvzgEZBdr1vKIkgWwGP8c1ej055ZzW6BCLpcqq-IQ6UL5QIkAbglgGEk9FjTXCSnehKXSK5y-hxzgLTqEYeYYtRAJ7wD5F-twal7KpubLy4CD7Q8TV2ozYR5yC7BM1Qhv1CM55EUsShZwV5cbEpSDlSqmj37LbQk0gkQ5NuM7xk0WgiN-C7g",
+									"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjQwMTU0NmJkMWRhMzA0ZDc2NGNmZWUzYTJhZTVjZDBlNGY2ZjgyN2IiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiS291c3RhdiBQYWwiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2pQUG1SekNqT05MdkRidkpxblBIVXBZVDNEV3FDNTg0Q3lBdm9qT3c9czk2LWMiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vYm9va21lZXQtYjQ0NTUiLCJhdWQiOiJib29rbWVldC1iNDQ1NSIsImF1dGhfdGltZSI6MTY0MjQzNzg3MiwidXNlcl9pZCI6ImFORWx6dXBjR2ZhRDJrOEY0ZVhsdHdLdVRPOTMiLCJzdWIiOiJhTkVsenVwY0dmYUQyazhGNGVYbHR3S3VUTzkzIiwiaWF0IjoxNjQyNDM3ODcyLCJleHAiOjE2NDI0NDE0NzIsImVtYWlsIjoia3YucGFsOUBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjEwMDUzOTY2MTc2MjUzMTAwMjQ5MCJdLCJlbWFpbCI6WyJrdi5wYWw5QGdtYWlsLmNvbSJdfSwic2lnbl9pbl9wcm92aWRlciI6Imdvb2dsZS5jb20ifX0.HFYuycTi7YQtr5aa1spa6VJb3elGaJxqySnOP8Fy_Em19F-TqIwJ86YHg5uYpm6ZNr6_9Fs5m7MNJ5_HQsZ-bsfuwt8R4K5SQ6p1kix8DKxgrVCZVJMP7FMW-m37pA7in1y3JH-G2wG_ZItSpiGst9VzMeOPtYJTKG4qtVJlQeF6J8E5AbApADLIBk-pBJWQbXwx4ffLPScRK3evm5_Aqid_BP4c100OiFv43h0H10gkpnFB96o_mRgIfK06lBhisnTtZvYcznGSk95bugb5bsgngu01qAg_pxoVPrrzu3U-70sD6of_dllD1z-rt-Sgm8KG1ivgF9mPOGSn-6nS6w",
 									"type": "string"
 								}
 							]
@@ -25,14 +37,13 @@
 						"header": [
 							{
 								"key": "token",
-								"value": "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjhmYmRmMjQxZTdjM2E2NTEzNTYwNmRkYzFmZWQyYzU1MjI2MzBhODciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoiTWFpbmFrIER1dHRhIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BT2gxNEdnaWJPeDRWLUhYdkdpYkJMYkdVaUJDcFR1VXNQVnpKSUdaSWIySlh3PXM5Ni1jIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2Jvb2ttZWV0LWI0NDU1IiwiYXVkIjoiYm9va21lZXQtYjQ0NTUiLCJhdXRoX3RpbWUiOjE2MzUyMzE3MTQsInVzZXJfaWQiOiJqT29VdXpyQjhLVkdEWTVhYXZlMnJJNUs5SjkzIiwic3ViIjoiak9vVXV6ckI4S1ZHRFk1YWF2ZTJySTVLOUo5MyIsImlhdCI6MTYzNTI2NjkyNywiZXhwIjoxNjM1MjcwNTI3LCJlbWFpbCI6ImR1dHRhLm1haW5hazI1NkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJnb29nbGUuY29tIjpbIjEwNjEzMTQ4NjA4OTM0ODYxOTUyMSJdLCJlbWFpbCI6WyJkdXR0YS5tYWluYWsyNTZAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9fQ.Nodvms563GWG9fVAKLgipOkKgoOp2Tv5TpLcTywX2DI7KGofKqQTRGfre2aqFCHVlq-AJwc1v1Sp4o48P4CbJOFGL4bsZvAM3gTsvKzlZ0SNbhaY_8qFOeXC_nHetm8Td01WXdMNhietHZtKPM_JaB2z2x2QWxZFrn2-iS5mWF3CbAAiN6MUZQUTUg-OI4D-HsF0CbIw0R314HVAzr-xcNAah9PtPnuvABNZZUHFBJJiUIme_jOBPpY2d_rw5CmPxmveW3tFoFSlFIjQweoRjf23Ub4M0V8G2kDE08J30V9GotPDfSraMd854q4UAnURf8orhiZjBMVttnzijkjKrA",
-								"type": "text",
-								"disabled": true
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWQ4M2UzOGY4ZTg5NDFhYzRiMmZiMTAiLCJyb2xlIjoidXNlciIsIm5hbWUiOm51bGwsImlzR29vZ2xlU2lnbmluIjp0cnVlLCJpYXQiOjE2NDE1Njk1NzV9.sfXuccsueFWo8LSOtlOWygDOjQKuZ_swT8syLUqyKhik1a--FjAY_ZuzuUQqHSi4CxdcGqGkWfPPTLNA6G5BSzurz1yQYb4a5Xw-b9FK5P3CEDx7bfMu2-ow65IelVwDc4SVKTH0vVAqs8jWmjoB7iJB_o0qC0jfZMZNTeb49tljIfq8yKhLHu_Og1_Ad8q2x3b73ueyzHah49t_cT2PSfdn-EL1Z5iTPauJ6my2khBOmLqS91KsnaCLGQ-9aSp0gdyz_CoqW89UiKRPEItT7ycXF-AHd_g6eaWakagWKIzyiLiniuFjdxGwlCbtvlehvizHdNgBK_6lp-NsTyktRs2e0V-A5xei2vkWg37yk2XuTZEwbWF8vFMpCGRcuFCHMwBK2Ae2vtsubXC-J-D2PBrKmg25qaova3cX_BgMdaVRb461Ld7EC1WQ8b2o1RJnv9v5I336AVpDpretVWcMTiPhhxcAKLFhSymzJkb7I3J0d-EoHgj-RIR4MTs7z5c0-7k7Yd-ue4mARR0IwVwvHHO7oCLJG07X6ajFExiVWTBz64LQJpOSRcmwJ1Dj9YJLZSSocSEAojOGnKHpbueoN2bHv1stLcUwfI6Dq9F6WgEnmMoUxERAIT_w2YjIzNWU5yKkKSrFVtpEY87rsVy-fdZ8C9gJ9PO0uE39S30mH4E",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"kv.pal9@gmail.com\",\r\n    \"uid\": \"PhQloM2CesUkDLNN57L7wFmkMZy2\"\r\n}",
+							"raw": "{\r\n    \"email\": \"kv.pal9@gmail.com\",\r\n    \"uid\": \"aNElzupcGfaD2k8F4eXltwKuTO93\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -114,6 +125,201 @@
 							"path": [
 								"demo",
 								"noauth"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get Current User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Profile Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/remove/profileimage",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"remove",
+								"profileimage"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User data",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Frost",
+									"type": "text"
+								},
+								{
+									"key": "phoneNo",
+									"value": "1234567890",
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "state",
+									"value": "WB",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/users/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Listing",
+			"item": [
+				{
+					"name": "Create Listing",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Harry Potter and the Prisoner of Askaban",
+									"type": "text"
+								},
+								{
+									"key": "author",
+									"value": "JK Rowling",
+									"type": "default"
+								},
+								{
+									"key": "genre",
+									"value": "['action', 'adventure']",
+									"type": "default"
+								},
+								{
+									"key": "publisher",
+									"value": "Bloomsbury",
+									"type": "default"
+								},
+								{
+									"key": "isbn",
+									"value": "876549812345",
+									"type": "default"
+								},
+								{
+									"key": "synopsys",
+									"value": "Serius Black is on the hunt for Harry. Ron find out that his rat scabbers is actually peter pettigrew",
+									"type": "default"
+								},
+								{
+									"key": "language",
+									"value": "english",
+									"type": "default"
+								},
+								{
+									"key": "condition",
+									"value": "good",
+									"type": "default"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": [
+										"/Users/koustavpal/Downloads/harry1.jpeg",
+										"/Users/koustavpal/Downloads/harry2.jpeg",
+										"/Users/koustavpal/Downloads/harry3.jpeg"
+									]
+								},
+								{
+									"key": "city",
+									"value": "Kolkata",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "West Bengal",
+									"type": "default"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/listing/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"listing",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Listings for the Landing Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/listing/landing",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"listing",
+								"landing"
 							]
 						}
 					},
