@@ -19,16 +19,20 @@ export default async ({ app }: { app: express.Application }): Promise<any> => {
   app.head('/status', (req, res) => {
     res.status(200).end();
   });
+  app.get('/', (req, res) => {
+    app.set('views', path.join(__dirname, '../views'));
+    res.render('index.ejs');
+  });
 
   i18next
     .use(Backend)
     .use(i18nextMiddleware.LanguageDetector)
     .init({
       backend: {
-        loadPath: path.join(__dirname, '../resources/locales/{{lng}}/{{ns}}.json')
+        loadPath: path.join(__dirname, '../resources/locales/{{lng}}/{{ns}}.json'),
       },
       fallbackLng: 'en',
-      preload: ['en']
+      preload: ['en'],
     });
   app.use(i18nextMiddleware.handle(i18next));
 
@@ -50,9 +54,11 @@ export default async ({ app }: { app: express.Application }): Promise<any> => {
 
   // Middleware that transforms the raw string of req.body into json
   app.use(express.json({ limit: '50mb' }));
-  app.use(express.urlencoded({
-    extended: true
-  }));
+  app.use(
+    express.urlencoded({
+      extended: true,
+    }),
+  );
   app.use(cookieParser());
 
   // Load API routes
@@ -71,10 +77,7 @@ export default async ({ app }: { app: express.Application }): Promise<any> => {
      * Handle 401 thrown by express-jwt library
      */
     if (err.name === 'UnauthorizedError') {
-      return res
-        .status(err.status)
-        .send({ message: err.message })
-        .end();
+      return res.status(err.status).send({ message: err.message }).end();
     }
     return next(err);
   });
