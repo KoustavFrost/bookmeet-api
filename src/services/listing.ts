@@ -98,7 +98,7 @@ export default class ListingService extends CommonService {
       };
 
       console.log('query ----------> ', query);
-      // TODO: Check once why this is not working
+      // @todo: Debug once why update listing is not working in standard way
       const listing = await this.listingModel.findOneAndUpdate({ _id: id }, { query });
       console.log('listing ----------> ', listing);
 
@@ -138,4 +138,6 @@ export default class ListingService extends CommonService {
       throw error;
     }
   }
+
+  // @todo: Create a function to check whether the current user has more than 2 listings or not
 }
