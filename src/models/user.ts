@@ -35,6 +35,10 @@ const User = new mongoose.Schema(
       default: true,
     },
     status: String,
+    hasUpdatedProfile: {
+      type: Boolean,
+      default: false,
+    },
     lastLogin: Date,
   },
   { timestamps: true },

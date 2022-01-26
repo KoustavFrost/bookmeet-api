@@ -17,6 +17,7 @@ export default (app: Router) => {
     '/create',
     middlewares.isAuth,
     middlewares.attachCurrentUser,
+    middlewares.hasUpdatedProfile,
     middlewares.imageUpload.array('images', 5),
     async (req: Request, res: Response, next: NextFunction) => {
       const logger: Logger = Container.get('logger');
@@ -108,6 +109,7 @@ export default (app: Router) => {
     }),
     middlewares.isAuth,
     middlewares.attachCurrentUser,
+    middlewares.hasUpdatedProfile,
     middlewares.imageUpload.array('images', 5),
     async (req: Request, res: Response, next: NextFunction) => {
       const logger: Logger = Container.get('logger');
@@ -147,6 +149,7 @@ export default (app: Router) => {
     '/currentuser/getall/listing',
     middlewares.isAuth,
     middlewares.attachCurrentUser,
+    middlewares.hasUpdatedProfile,
     async (req: Request, res: Response, next: NextFunction) => {
       const logger: Logger = Container.get('logger');
       logger.debug('Calling get all listing for the current user end point');

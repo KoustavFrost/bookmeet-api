@@ -50,6 +50,7 @@ export default class UserService {
       if (phoneNo) user.phoneNo = phoneNo;
       if (state) user.location.state = state;
       if (imagePath) user.image = imagePath; // For now images are kept in local
+      if (!user.hasUpdatedProfile) user.hasUpdatedProfile = true;
 
       await user.save();
 
@@ -75,6 +76,19 @@ export default class UserService {
       await user.save();
 
       return { message: i18next.t('removedProfileImage') };
+    } catch (error) {
+      this.logger.error(error);
+      throw error;
+    }
+  }
+
+  public async checkUpdatedProfile(userId: string): Promise<boolean> {
+    try {
+      const user = await this.userModel.findById(userId);
+      if (!user) {
+        throw new Error(i18next.t('userDoesNotExists'));
+      }
+      return user.hasUpdatedProfile;
     } catch (error) {
       this.logger.error(error);
       throw error;

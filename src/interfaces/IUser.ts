@@ -10,6 +10,7 @@ export interface IUser {
   location: { state: string; country: DefaultCountry.INDIA };
   role: Roles;
   isActive: boolean;
+  hasUpdatedProfile: boolean;
   status: string;
   lastLogin: Date;
 }
@@ -24,6 +25,7 @@ export interface IUserInputDTO {
   location: { state: string; country: DefaultCountry.INDIA };
   role: Roles;
   isActive: boolean;
+  hasUpdatedProfile: boolean;
   status: string;
   lastLogin: Date;
 }

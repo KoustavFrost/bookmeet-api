@@ -6,6 +6,7 @@
   "userDoesNotExists": "This user does not exists.",
   "updatedUser": "Profile data updated successfully.",
   "removedProfileImage": "Profile picture removed successfully.",
+  "profileNotUpdated": "Profile data not updated.",
   "general": {
     "success": "SUCCESS",
     "fail": "FAILURE"
