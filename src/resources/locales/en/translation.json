@@ -6,9 +6,15 @@
   "userDoesNotExists": "This user does not exists.",
   "updatedUser": "Profile data updated successfully.",
   "removedProfileImage": "Profile picture removed successfully.",
+  "general": {
+    "success": "SUCCESS",
+    "fail": "FAILURE"
+  },
   "listing": {
     "create": "Listing created successfully.",
     "error": "An error has occured.",
-    "landing": "Listings for the landing page has been fetched successfully."
+    "landing": "Listings for the landing page has been fetched successfully.",
+    "update": "Listing updated successfully.",
+    "noListing": "No listing found for this user."
   }
 }

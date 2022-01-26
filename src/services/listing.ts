@@ -40,7 +40,7 @@ export default class ListingService extends CommonService {
       return { message: i18next.t('listing.create') };
     } catch (error) {
       this.logger.error(error);
-      this.endPerformanceLogging('Create strain');
+      this.endPerformanceLogging('Create listing');
       throw error;
     }
   }
@@ -81,6 +81,60 @@ export default class ListingService extends CommonService {
     } catch (error) {
       this.logger.error(error);
       this.endPerformanceLogging('Get listing by id');
+      throw error;
+    }
+  }
+
+  // Function to update listing
+  public async updateListing(data: IListingInputDTO, images: string[], id: string): Promise<{ message: string }> {
+    this.logger.info('====Updating the listing: %s====', data);
+    this.startPerformanceLogging();
+
+    try {
+      console.log('id ----------> ', id);
+      const query = {
+        ...data,
+        images: images,
+      };
+
+      console.log('query ----------> ', query);
+      // TODO: Check once why this is not working
+      const listing = await this.listingModel.findOneAndUpdate({ _id: id }, { query });
+      console.log('listing ----------> ', listing);
+
+      if (!listing) {
+        this.logger.error('Failed to update Listing');
+        throw new Error(i18next.t('listing.error'));
+      }
+
+      return { message: i18next.t('listing.update') };
+    } catch (error) {
+      this.logger.error(error);
+      this.endPerformanceLogging('Update Listing');
+      throw error;
+    }
+  }
+
+  // Function to get all the listing for the current user
+  public async getCurrentUserListing(currentUser: IUser): Promise<{ listings?: IListing[]; message: string }> {
+    this.logger.info('====Fetching the listing for the current user ====');
+    this.startPerformanceLogging();
+
+    try {
+      const query = {
+        userId: currentUser._id,
+      };
+
+      const listings = await this.listingModel.find(query);
+
+      if (!listings) {
+        throw new Error(i18next.t('listing.noListing'));
+      }
+
+      return { listings, message: i18next.t('general.success') };
+    } catch (error) {
+      this.logger.error(error);
+      this.endPerformanceLogging('Current user listing');
       throw error;
     }
   }
