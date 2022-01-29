@@ -3,12 +3,10 @@ updates:
 - package-ecosystem: npm
   directory: "/"
   schedule:
-    interval: weekly
-    day: wednesday
-    time: "11:00"
-    timezone: "Asia/Kolkata"
+    interval: monthly
+    time: "23:30"
   open-pull-requests-limit: 10
-  target-branch: main
+  target-branch: dev
   ignore:
   - dependency-name: eslint
     versions:
