@@ -24,7 +24,6 @@ export default class AuthService {
   ) {}
 
   public async googleSignIn(data: any): Promise<{ user: IUser; token: string; message: string }> {
-
     const updateUser = async (id: string, userDataToUpdate: any) => {
       return await this.userModel.findByIdAndUpdate(id, { ...userDataToUpdate, lastLogin: new Date() }, { new: true });
     };
@@ -36,10 +35,14 @@ export default class AuthService {
       let isNew = false;
 
       if (userExists) {
-        userRecord = await updateUser(userExists._id, {
-          image: data.photoUrl,
-          name: data.name,
-        });
+        if (!userExists.hasUpdatedProfile) {
+          userRecord = await updateUser(userExists._id, {
+            image: data.photoUrl,
+            name: data.name,
+          });
+        } else {
+          userRecord = userExists;
+        }
       } else {
         let userdata: any = {
           image: data.photoUrl,
@@ -71,19 +74,6 @@ export default class AuthService {
   }
 
   private generateToken(user) {
-    // const today = new Date();
-    // const exp = new Date(today);
-    // exp.setDate(today.getDate() + 60);
-
-    /**
-     * A JWT means JSON Web Token, so basically it's a json that is _hashed_ into a string
-     * The cool thing is that you can add custom properties a.k.a metadata
-     * Here we are adding the userId, role and name
-     * Beware that the metadata is public and can be decoded without _the secret_
-     * but the client cannot craft a JWT to fake a userId
-     * because it doesn't have _the secret_ to sign it
-     * more information here: https://softwareontheroad.com/you-dont-need-passport
-     */
     this.logger.silly(`Sign JWT for userId: ${user._id}`);
     return jwt.sign(
       {
@@ -93,7 +83,7 @@ export default class AuthService {
         isGoogleSignin: user.isGoogleSignin || false,
       },
       this.privateJWTRS256Key,
-      { algorithm: 'RS256' }
+      { algorithm: 'RS256' },
     );
   }
 }

@@ -36,7 +36,7 @@ export default class UserService {
     phoneNo: string,
     state: string,
     imagePath: string,
-  ): Promise<{ message: string }> {
+  ): Promise<{ user: IUser; message: string }> {
     try {
       let user = await this.userModel.findById(currentUser._id);
 
@@ -54,7 +54,7 @@ export default class UserService {
 
       await user.save();
 
-      return { message: i18next.t('updatedUser') };
+      return { user, message: i18next.t('updatedUser') };
     } catch (error) {
       this.logger.error(error);
       throw error;

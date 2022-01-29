@@ -45,14 +45,14 @@ export default (app: Router) => {
       try {
         const userServiceInstance = Container.get(UserService);
         const { name, phoneNo, state } = req.body;
-        const { message } = await userServiceInstance.updateUser(
+        const { user, message } = await userServiceInstance.updateUser(
           req.currentUser,
           name,
           phoneNo,
           state,
           req.files[0] ? req.files[0].path : '',
         );
-        return res.status(201).json({ message });
+        return res.status(201).json({ user, message });
       } catch (e) {
         logger.error('🔥 error: %o', e);
         return next(e);
