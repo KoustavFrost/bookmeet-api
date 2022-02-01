@@ -55,7 +55,7 @@
     "multer": "^1.4.4",
     "nodemailer": "^6.4.8",
     "reflect-metadata": "^0.1.12",
-    "sharp": "^0.29.3",
+    "sharp": "^0.30.0",
     "typedi": "^0.10.0",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^4.4.2"
