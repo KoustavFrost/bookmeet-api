@@ -3,17 +3,17 @@ import { Container } from 'typedi';
 import LoggerInstance from './logger';
 import * as admin from 'firebase-admin';
 
-const serviceAccount = require('../config/serviceAccount.json');
+const serviceAccount = require('./serviceAccount.json');
 
 export default async ({ models }: { models: { name: string; model: any }[] }): Promise<any> => {
   try {
-    models.forEach(m => {
+    models.forEach((m) => {
       Container.set(m.name, m.model);
     });
 
     // Initializing the service acount for firebase
     let app = admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount)
+      credential: admin.credential.cert(serviceAccount),
     });
 
     const privateJWTRS256Key = readFileSync('./keys/jwtRS256.key');
@@ -22,7 +22,7 @@ export default async ({ models }: { models: { name: string; model: any }[] }): P
     Container.set('publicJWTRS256Key', publicJWTRS256Key);
     Container.set('firebaseAdmin', app);
 
-    Container.set('logger', LoggerInstance)
+    Container.set('logger', LoggerInstance);
   } catch (e) {
     LoggerInstance.error('🔥 Error on dependency injector loader: %o', e);
     throw e;
