@@ -6,6 +6,8 @@ import express from 'express';
 
 import Logger from './loaders/logger';
 
+import socketIoHandlers from './socketEventHandlers/eventHandlers';
+
 import { readFileSync } from 'fs';
 
 async function startServer() {
@@ -14,7 +16,7 @@ async function startServer() {
 
   const options = {
     key: readFileSync('./keys/key.pem'),
-    cert: readFileSync('./keys/cert.pem')
+    cert: readFileSync('./keys/cert.pem'),
   };
 
   /**
@@ -25,16 +27,29 @@ async function startServer() {
    **/
   await require('./loaders').default({ expressApp: app });
 
-  https.createServer(options, app).listen(config.port, () => {
-    Logger.info(`
+  const server = https
+    .createServer(options, app)
+    .listen(config.port, () => {
+      Logger.info(`
       ################################################
       🛡️  Server listening on port: ${config.port} 🛡️
       ################################################
     `);
-  }).on('error', err => {
-    Logger.error(err);
-    process.exit(1);
+    })
+    .on('error', (err) => {
+      Logger.error(err);
+      process.exit(1);
+    });
+
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const io = require('socket.io')(server, {
+    cors: {
+      origin: '*',
+      methods: ['GET', 'POST'],
+    },
   });
+
+  socketIoHandlers(io);
 }
 
 startServer();
