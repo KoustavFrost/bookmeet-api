@@ -8,16 +8,8 @@ import Logger from './loaders/logger';
 
 import socketIoHandlers from './socketEventHandlers/eventHandlers';
 
-import { readFileSync } from 'fs';
-
 async function startServer() {
   const app = express();
-  const https = require('https');
-
-  const options = {
-    key: readFileSync('./keys/key.pem'),
-    cert: readFileSync('./keys/cert.pem'),
-  };
 
   /**
    * A little hack here
@@ -27,8 +19,7 @@ async function startServer() {
    **/
   await require('./loaders').default({ expressApp: app });
 
-  const server = https
-    .createServer(options, app)
+  const server = app
     .listen(config.port, () => {
       Logger.info(`
       ################################################
