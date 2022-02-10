@@ -2,8 +2,8 @@ import { readFileSync } from 'fs';
 import { Container } from 'typedi';
 import LoggerInstance from './logger';
 import * as admin from 'firebase-admin';
-
-const serviceAccount = require('./serviceAccount.json');
+console.log('loading di');
+const serviceAccount = require('../../serviceAccount.json');
 
 export default async ({ models }: { models: { name: string; model: any }[] }): Promise<any> => {
   try {
