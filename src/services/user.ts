@@ -1,31 +1,58 @@
 import { Service, Inject } from 'typedi';
 import { IUser } from '../interfaces/IUser';
 import _ from 'lodash';
-import argon2 from 'argon2';
-import { randomBytes } from 'crypto';
 import i18next from 'i18next';
-
+import CommonService from './common';
+import config from '../config';
+import { Roles } from '../config/constants';
 @Service()
-export default class UserService {
-  constructor(@Inject('userModel') private userModel: Models.UserModel, @Inject('logger') private logger) {}
+export default class UserService extends CommonService {
+  constructor(@Inject('userModel') private userModel: Models.UserModel, @Inject('logger') private logger) {
+    super();
+    this.initiatePerformanceLogger();
+  }
 
-  public async getAllUsers(currentUser: IUser, userId: string): Promise<{ users: IUser[] | IUser }> {
-    // Find all users
-    // TODO: exclude admins, I want only I can see admin users
+  public async getCurrentUser(currentUser: IUser): Promise<IUser> {
+    this.logger.info('====Fetching the current user data ====');
+    this.startPerformanceLogging();
     try {
-      let users;
-      if (userId) {
-        const user = await this.userModel.findOne({ _id: userId });
-        users = user.toObject();
-      } else {
-        users = await this.userModel.find();
+      const user: IUser = await this.userModel.findById(currentUser._id);
+
+      if (user.image) {
+        user.image = `${config.imageUrl}${user.image}`;
       }
-      if (_.isEmpty(users)) {
-        throw new Error('Users/Users doesnt exists');
-      }
-      return { users };
+
+      return user;
     } catch (error) {
       this.logger.error(error);
+      this.endPerformanceLogging('Current user listing');
+      throw error;
+    }
+  }
+
+  public async getUserById(userId: string): Promise<{ user: IUser }> {
+    this.logger.info('Fetching the user details by id');
+    this.startPerformanceLogging();
+
+    try {
+      const user: IUser = await this.userModel.findById(userId);
+
+      if (!user) {
+        throw new Error(i18next.t('userDoesNotExists'));
+      }
+
+      if (user.role === Roles.ADMIN) {
+        throw new Error(`Permission Denied`);
+      }
+
+      if (user.image) {
+        user.image = `${config.imageUrl}${user.image}`;
+      }
+
+      return { user };
+    } catch (error) {
+      this.logger.error(error);
+      this.endPerformanceLogging('Current user listing');
       throw error;
     }
   }
