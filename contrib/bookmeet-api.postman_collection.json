@@ -214,6 +214,24 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get user details by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/61f548aa3e737d044398273b",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"61f548aa3e737d044398273b"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
