@@ -4,7 +4,7 @@ export enum DefaultCountry {
 
 export enum Roles {
   USER = 'user',
-  SUPERADMIN = 'superadmin',
+  ADMIN = 'admin',
 }
 
 export enum ActiveStatus {

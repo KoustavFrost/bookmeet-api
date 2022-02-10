@@ -24,6 +24,9 @@ export default async ({ app }: { app: express.Application }): Promise<any> => {
   //   res.render('index.ejs');
   // });
 
+  // Added express path for the images in uploads folder
+  app.use('/uploads', express.static(path.join(__dirname, '../../uploads')));
+
   i18next
     .use(Backend)
     .use(i18nextMiddleware.LanguageDetector)
