@@ -21,8 +21,7 @@ export default async ({ app }: { app: express.Application }): Promise<any> => {
   });
 
   app.get('/', (req, res) => {
-    app.set('views', path.join(__dirname));
-    res.render('landing.ejs');
+    res.send('Booksmeet api');
   });
 
   // Added express path for the images in uploads folder
