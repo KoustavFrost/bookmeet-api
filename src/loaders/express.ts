@@ -21,8 +21,8 @@ export default async ({ app }: { app: express.Application }): Promise<any> => {
   });
 
   app.get('/', (req, res) => {
-    app.set('views', path.join(__dirname, '../views'));
-    res.render('index.ejs');
+    app.set('views', path.join(__dirname));
+    res.render('landing.ejs');
   });
 
   // Added express path for the images in uploads folder
