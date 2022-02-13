@@ -121,6 +121,8 @@ export default (app: Router) => {
         // Validation
         commonValidators.objectValidator(req.body, requiredFields as string[]);
 
+        req.body.genre = req.body.genre.split(',');
+
         const images: string[] = [];
         if (req.files) {
           // User has uploaded images
@@ -135,8 +137,12 @@ export default (app: Router) => {
         // Getting the id as params
         const { id } = req.params;
         const listingServiceInstance = Container.get(ListingService);
-        const { message } = await listingServiceInstance.updateListing(req.body as IListingInputDTO, images, id);
-        return res.json({ message }).status(200);
+        const { listing, message } = await listingServiceInstance.updateListing(
+          req.body as IListingInputDTO,
+          images,
+          id,
+        );
+        return res.json({ listing, message }).status(200);
       } catch (e) {
         logger.error('🔥 error: %o', e);
         return next(e);

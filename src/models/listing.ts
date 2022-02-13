@@ -43,9 +43,7 @@ const Listing = new Schema(
       enum: BookConditions,
       required: true,
     },
-    images: {
-      type: Array,
-    },
+    images: Array,
     status: {
       status: {
         type: String,
