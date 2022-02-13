@@ -10,7 +10,7 @@ export interface IListing {
   synopsys: string;
   language: string;
   condition: BookConditions;
-  images: [];
+  images: any;
   status: {
     status: ListingStatus;
     reason: string;
