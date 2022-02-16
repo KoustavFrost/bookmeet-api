@@ -25,23 +25,6 @@ async function startServer() {
       Logger.error(err);
       process.exit(1);
     });
-
-  // const https = require('https');
-  // const options = {
-  //   key: readFileSync('./keys/key.pem'),
-  //   cert: readFileSync('./keys/cert.pem')
-  // };
-
-  // https.createServer(options, app).listen(config.port, () => {
-  //   Logger.info(`
-  //     ################################################
-  //     🛡️  Server listening on port: ${config.port} 🛡️
-  //     ################################################
-  //   `);
-  // }).on('error', err => {
-  //   Logger.error(err);
-  //   process.exit(1);
-  // });
 }
 
 startServer();

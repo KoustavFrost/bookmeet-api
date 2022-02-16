@@ -9,6 +9,7 @@ class CommonValidators {
   public objectValidator(paramsObj: Object, requiredFields: string[]) {
     try {
       requiredFields.forEach((element) => {
+        // TODO: change the foreach here as foreach is async. use for of
         if (this.isUndefined(paramsObj[element])) {
           // Throw error
           throw {
