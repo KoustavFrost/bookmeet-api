@@ -86,28 +86,31 @@ export default class ListingService extends CommonService {
   }
 
   // Function to update listing
-  public async updateListing(data: IListingInputDTO, images: string[], id: string): Promise<{ message: string }> {
+  public async updateListing(
+    data: IListingInputDTO,
+    images: string[],
+    id: string,
+  ): Promise<{ listing: IListing; message: string }> {
     this.logger.info('====Updating the listing: %s====', data);
     this.startPerformanceLogging();
 
     try {
-      console.log('id ----------> ', id);
+      const filter = { _id: id };
       const query = {
         ...data,
         images: images,
       };
 
-      console.log('query ----------> ', query);
-      // @todo: Debug once why update listing is not working in standard way
-      const listing = await this.listingModel.findOneAndUpdate({ _id: id }, { query });
-      console.log('listing ----------> ', listing);
+      const listing = await this.listingModel.findOneAndUpdate(filter, query, {
+        new: true,
+      });
 
       if (!listing) {
         this.logger.error('Failed to update Listing');
         throw new Error(i18next.t('listing.error'));
       }
 
-      return { message: i18next.t('listing.update') };
+      return { listing, message: i18next.t('listing.update') };
     } catch (error) {
       this.logger.error(error);
       this.endPerformanceLogging('Update Listing');

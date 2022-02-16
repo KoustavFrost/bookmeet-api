@@ -90,6 +90,6 @@
   },
   "homepage": "https://github.com/KoustavFrost/bookmeet-api#readme",
   "engines": {
-    "node": ">=16.10.0"
+    "node": "16.x"
   }
 }

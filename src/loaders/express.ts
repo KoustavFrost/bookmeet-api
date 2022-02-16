@@ -19,10 +19,13 @@ export default async ({ app }: { app: express.Application }): Promise<any> => {
   app.head('/status', (req, res) => {
     res.status(200).end();
   });
+
   app.get('/', (req, res) => {
-    app.set('views', path.join(__dirname, '../views'));
-    res.render('index.ejs');
+    res.send('Booksmeet api');
   });
+
+  // Added express path for the images in uploads folder
+  app.use('/uploads', express.static(path.join(__dirname, '../../uploads')));
 
   i18next
     .use(Backend)

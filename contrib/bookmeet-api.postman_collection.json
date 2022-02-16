@@ -214,6 +214,24 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get user details by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/61f548aa3e737d044398273b",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"61f548aa3e737d044398273b"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -230,17 +248,17 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Harry Potter and the Prisoner of Askaban",
+									"value": "The Alchemist",
 									"type": "text"
 								},
 								{
 									"key": "author",
-									"value": "JK Rowling",
+									"value": "Paulo Coelho",
 									"type": "default"
 								},
 								{
 									"key": "genre",
-									"value": "['action', 'adventure']",
+									"value": "'adventure'",
 									"type": "default"
 								},
 								{
@@ -250,12 +268,12 @@
 								},
 								{
 									"key": "isbn",
-									"value": "876549812345",
+									"value": "653478965412",
 									"type": "default"
 								},
 								{
 									"key": "synopsys",
-									"value": "Serius Black is on the hunt for Harry. Ron find out that his rat scabbers is actually peter pettigrew",
+									"value": "A novel by Paulo Coelho.",
 									"type": "default"
 								},
 								{
@@ -271,11 +289,7 @@
 								{
 									"key": "images",
 									"type": "file",
-									"src": [
-										"/Users/koustavpal/Downloads/harry1.jpeg",
-										"/Users/koustavpal/Downloads/harry2.jpeg",
-										"/Users/koustavpal/Downloads/harry3.jpeg"
-									]
+									"src": "/Users/koustavpal/Downloads/18144590._UY2404_SS2404_.jpg"
 								},
 								{
 									"key": "city",
@@ -312,52 +326,43 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Harry Potter",
+									"value": "The Alchemist 10",
 									"type": "text"
 								},
 								{
 									"key": "author",
-									"value": "JK Rowling",
-									"type": "default"
+									"value": "Paulo Coelho",
+									"type": "text"
 								},
 								{
 									"key": "genre",
-									"value": "['action', 'adventure']",
-									"type": "default"
+									"value": "adventure,romantic,action",
+									"type": "text"
 								},
 								{
 									"key": "publisher",
 									"value": "Bloomsbury",
-									"type": "default"
+									"type": "text"
 								},
 								{
 									"key": "isbn",
-									"value": "876549812345",
-									"type": "default"
+									"value": "653478965412",
+									"type": "text"
 								},
 								{
 									"key": "synopsys",
-									"value": "Serius Black is on the hunt for Harry. Ron find out that his rat scabbers is actually peter pettigrew",
-									"type": "default"
+									"value": "A novel by Paulo Coelho.",
+									"type": "text"
 								},
 								{
 									"key": "language",
 									"value": "english",
-									"type": "default"
+									"type": "text"
 								},
 								{
 									"key": "condition",
 									"value": "good",
-									"type": "default"
-								},
-								{
-									"key": "images",
-									"type": "file",
-									"src": [
-										"/Users/koustavpal/Downloads/harry1.jpeg",
-										"/Users/koustavpal/Downloads/harry2.jpeg",
-										"/Users/koustavpal/Downloads/harry3.jpeg"
-									]
+									"type": "text"
 								},
 								{
 									"key": "city",
@@ -367,19 +372,24 @@
 								{
 									"key": "state",
 									"value": "West Bengal",
-									"type": "default"
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": "/Users/koustavpal/Downloads/18144590._UY2404_SS2404_.jpg"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{url}}/listing/update/61e5b0289924f41757d509c0",
+							"raw": "{{url}}/listing/update/6208aa55e713e13b59f5b286",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"listing",
 								"update",
-								"61e5b0289924f41757d509c0"
+								"6208aa55e713e13b59f5b286"
 							]
 						}
 					},
@@ -478,7 +488,7 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "https://localhost:3000/api"
+			"value": "http://localhost:3000/api"
 		}
 	]
 }

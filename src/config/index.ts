@@ -37,6 +37,8 @@ export default {
 
   mailer: {
     username: process.env.MAILER_USERNAME,
-    password: process.env.MAILER_PASSWORD
-  }
+    password: process.env.MAILER_PASSWORD,
+  },
+
+  imageUrl: process.env.IMAGE_URL || 'https://localhost:3000/',
 };

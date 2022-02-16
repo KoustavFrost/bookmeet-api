@@ -3,6 +3,7 @@ import middlewares from '../middlewares';
 import { Container } from 'typedi';
 import UserService from '../../services/user';
 import { Logger } from 'winston';
+import { IUser } from '../../interfaces/IUser';
 
 const route = Router();
 
@@ -10,9 +11,23 @@ export default (app: Router) => {
   app.use('/users', route);
 
   // Details of current user
-  route.get('/me', middlewares.isAuth, middlewares.attachCurrentUser, (req: Request, res: Response) => {
-    return res.json({ user: req.currentUser }).status(200);
-  });
+  route.get(
+    '/me',
+    middlewares.isAuth,
+    middlewares.attachCurrentUser,
+    async (req: Request, res: Response, next: NextFunction) => {
+      const logger: Logger = Container.get('logger');
+      logger.debug('Calling get current user endpoint %o', req.currentUser);
+      try {
+        const userServiceInstance = Container.get(UserService);
+        const user: IUser = await userServiceInstance.getCurrentUser(req.currentUser);
+        return res.status(201).json({ user });
+      } catch (e) {
+        logger.error('🔥 error: %o', e);
+        return next(e);
+      }
+    },
+  );
 
   // Details of an user based on id
   route.get(
@@ -23,9 +38,10 @@ export default (app: Router) => {
       const logger: Logger = Container.get('logger');
       logger.debug('Calling users endpoint');
       try {
+        const { id } = req.params;
         const userServiceInstance = Container.get(UserService);
-        const { users } = await userServiceInstance.getAllUsers(req.currentUser, req.params.id);
-        return res.status(201).json({ users });
+        const { user } = await userServiceInstance.getUserById(id);
+        return res.status(201).json({ user });
       } catch (e) {
         logger.error('🔥 error: %o', e);
         return next(e);
