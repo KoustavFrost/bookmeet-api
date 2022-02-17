@@ -4,6 +4,7 @@ import { IUser } from '../interfaces/IUser';
 import i18next from 'i18next';
 import { EventDispatcher, EventDispatcherInterface } from '../decorators/eventDispatcher';
 import CommonService from './common';
+import { ListingStatus } from '../config/constants';
 
 @Service()
 export default class ListingService extends CommonService {
@@ -142,5 +143,46 @@ export default class ListingService extends CommonService {
     }
   }
 
-  // @todo: Create a function to check whether the current user has more than 2 listings or not
+  // Service function to remove a listing
+  public async removeListing(currentUser: IUser, listingId: string, reason: string): Promise<{ message: string }> {
+    this.logger.info(`Removing listing for ${currentUser._id} with the listing id of ${listingId}`);
+    this.startPerformanceLogging();
+
+    try {
+      const listing: IListing = await this.listingModel.findById(listingId);
+
+      if (!listing) {
+        throw new Error(i18next.t('listing.noListing'));
+      }
+
+      if (listing.userId.toString() !== currentUser._id.toString()) {
+        // This listing does not belong to the requested user. Abort
+        throw new Error(i18next.t('general.userMismatch'));
+      }
+
+      if (listing.status.status === ListingStatus.REMOVED) {
+        // Listing already removed
+        throw new Error(i18next.t('listing.alreadyRemoved'));
+      }
+
+      const query = {
+        status: {
+          status: ListingStatus.REMOVED,
+          reason: reason,
+        },
+      };
+
+      const updatedListing: IListing = await this.listingModel.findByIdAndUpdate(listingId, query, {
+        new: true,
+      });
+
+      return { message: i18next.t('listing.removed') };
+    } catch (error) {
+      this.logger.error(error);
+      this.endPerformanceLogging('Remove a listing with reason');
+      throw error;
+    }
+  }
+
+  // TODO: Create a function to check whether the current user has more than 2 listings or not
 }

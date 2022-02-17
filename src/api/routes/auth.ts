@@ -22,7 +22,7 @@ export default (app: Router) => {
         uid: Joi.string().required(),
       }),
     }),
-    // middlewares.firebaseIsAuth,
+    middlewares.firebaseIsAuth,
     async (req: Request, res: Response, next: NextFunction) => {
       const logger: Logger = Container.get('logger');
       logger.debug('Calling Google Sign-In endpoint with body: %o', req.body);

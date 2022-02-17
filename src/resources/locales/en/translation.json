@@ -9,13 +9,16 @@
   "profileNotUpdated": "Profile data not updated.",
   "general": {
     "success": "SUCCESS",
-    "fail": "FAILURE"
+    "fail": "FAILURE",
+    "userMismatch": "USER MISMATCH"
   },
   "listing": {
     "create": "Listing created successfully.",
     "error": "An error has occured.",
     "landing": "Listings for the landing page has been fetched successfully.",
     "update": "Listing updated successfully.",
-    "noListing": "No listing found for this user."
+    "noListing": "No listing found for this user.",
+    "alreadyRemoved": "This listing has already been removed. If it is not showing removed, then contact with the admin.",
+    "removed": "Your listing has been removed successfully."
   }
 }
