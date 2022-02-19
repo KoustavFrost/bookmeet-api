@@ -3,7 +3,7 @@ import { Container } from 'typedi';
 import middlewares from '../middlewares';
 import { Logger } from 'winston';
 import { celebrate, Joi, Segments } from 'celebrate';
-import ListingService from '../../services/listing';
+import ListingService from '../../services/Listing.service';
 import { IListingInputDTO } from '../../interfaces/IListing';
 import commonValidators from '../../validators/commonValidators';
 
@@ -165,6 +165,38 @@ export default (app: Router) => {
         const { listings, message } = await listingServiceInstance.getCurrentUserListing(req.currentUser);
 
         return res.json({ listings, message }).status(200);
+      } catch (e) {
+        logger.error('🔥 error: %o', e);
+        return next(e);
+      }
+    },
+  );
+
+  // Remove a listing
+  route.post(
+    '/remove/:id',
+    // TODO: Remove celebrate joi and implement validation from scratch or fix the joi issue returning Validation error
+    celebrate({
+      [Segments.HEADERS]: Joi.object({
+        authorization: Joi.string().required(),
+      }).unknown(),
+      [Segments.BODY]: Joi.object({
+        reason: Joi.string().required(),
+      }),
+    }),
+    middlewares.isAuth,
+    middlewares.attachCurrentUser,
+    async (req: Request, res: Response, next: NextFunction) => {
+      const logger: Logger = Container.get('logger');
+      logger.debug('Calling removing listing for the listing id ');
+
+      try {
+        const { id } = req.params; // User id
+        const { reason } = req.body;
+        const listingServiceInstance = Container.get(ListingService);
+        const { message } = await listingServiceInstance.removeListing(req.currentUser, id, reason);
+
+        return res.json({ message }).status(200);
       } catch (e) {
         logger.error('🔥 error: %o', e);
         return next(e);

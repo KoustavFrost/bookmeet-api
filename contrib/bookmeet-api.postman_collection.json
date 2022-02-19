@@ -451,6 +451,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Remove your listing",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reason\": \"Listing removed because it is not used anymore.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/listing/remove/6208aa55e713e13b59f5b286",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"listing",
+								"remove",
+								"6208aa55e713e13b59f5b286"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
