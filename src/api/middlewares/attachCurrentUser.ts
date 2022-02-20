@@ -15,7 +15,7 @@ const attachCurrentUser = async (req, res, next) => {
     const UserModel = Container.get('userModel') as mongoose.Model<IUser & mongoose.Document>;
     const userRecord = await UserModel.findById(req.token._id);
     if (!userRecord) {
-      return res.status(401); // TODO: handle this case
+      throw new Error('Failed to fetch user record.');
     }
     const currentUser = userRecord.toObject();
     Reflect.deleteProperty(currentUser, 'password');

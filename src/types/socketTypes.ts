@@ -10,4 +10,5 @@ export type AppData = {
 export enum SocketIoEvent {
   CONNECT = 'connect',
   DISCONNECT = 'disconnect',
+  SINGLE_CHAT = 'singlechat',
 }
