@@ -9,6 +9,7 @@ const wrap = (middleware) => (socket, next) => middleware(socket.request, {}, ne
 // -------- SOCKET.IO handlers ----------
 // --------------------------------------
 
+// TODO: Change this global socket to a map to redeuce time complexity
 export const globalSockets = [];
 
 // structure inspired by
