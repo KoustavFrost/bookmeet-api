@@ -1,7 +1,7 @@
 import { Server } from 'socket.io';
 import middlewares from '../api/middlewares';
 import { AppData, SocketIoEvent } from '../types/socketTypes';
-import singleChat from '../services/SingleChat.service';
+import singleChat from '../services/socketService/SingleChat';
 
 const wrap = (middleware) => (socket, next) => middleware(socket.request, {}, next);
 // TODO: Add the winston logger here

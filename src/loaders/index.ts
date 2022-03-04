@@ -29,8 +29,13 @@ export default async ({ expressApp }) => {
     model: require('../models/listing').default,
   };
 
+  const chatModel = {
+    name: 'chatModel',
+    model: require('../models/chat').default,
+  };
+
   await dependencyInjectorLoader({
-    models: [userModel, listingModel],
+    models: [userModel, listingModel, chatModel],
   });
   Logger.info('✌️ Dependency Injector loaded');
 
