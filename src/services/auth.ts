@@ -1,5 +1,6 @@
 import { Service, Inject } from 'typedi';
 import jwt from 'jsonwebtoken';
+import expressJWT from 'express-jwt';
 import MailerService from './mailer';
 import config from '../config';
 import argon2 from 'argon2';
@@ -11,6 +12,7 @@ import { Document } from 'mongoose';
 import admin from 'firebase-admin';
 import { ActiveStatus } from '../config/constants';
 import i18next from 'i18next';
+import { readFileSync } from 'fs';
 
 @Service()
 export default class AuthService {
@@ -85,5 +87,19 @@ export default class AuthService {
       this.privateJWTRS256Key,
       { algorithm: 'RS256' },
     );
+  }
+
+  public validateToken(token: string) {
+    try {
+      this.logger.info(`booksmeet:socketAuth:validateToken:token:: ${token}`);
+      const isAuth = jwt.verify(token, this.privateJWTRS256Key, {
+        algorithms: ['RS256'],
+      });
+
+      return isAuth;
+    } catch (error) {
+      this.logger.error('booksmeet:socketAuth:validateToken:error:: %o', JSON.stringify(error));
+      throw new Error('Failed to validate token!');
+    }
   }
 }
