@@ -12,7 +12,7 @@ import { readFileSync } from 'fs';
  * GET https://my-bulletproof-api.com/stats?apiKey=${JWT}
  * Luckily this API follow _common sense_ ergo a _good design_ and don't allow that ugly stuff
  */
-const getTokenFromHeader = req => {
+const getTokenFromHeader = (req) => {
   /**
    * @TODO Edge and Internet Explorer do some weird things with the headers
    * So I believe that this should handle more 'edge' cases ;)
@@ -31,7 +31,7 @@ const isAuth = jwt({
   secret: publicJWTRS256Key, // The _secret_ to sign the JWTs
   userProperty: 'token', // Use req.token to store the JWT
   getToken: getTokenFromHeader, // How to extract the JWT from the request
-  algorithms: ['RS256']
+  algorithms: ['RS256'],
 });
 
 export default isAuth;

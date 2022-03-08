@@ -10,5 +10,12 @@ export type AppData = {
 export enum SocketIoEvent {
   CONNECT = 'connect',
   DISCONNECT = 'disconnect',
+  SOCKET_AUTH = 'socketauth',
   SINGLE_CHAT = 'singlechat',
+}
+
+export interface isAuth {
+  _id: string;
+  role: string;
+  name: string;
 }
