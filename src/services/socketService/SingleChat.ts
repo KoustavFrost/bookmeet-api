@@ -20,6 +20,16 @@ const singleChat = (app, socket) => (data) => {
   let returnData: any = '';
 
   try {
+    const socketId: string = socket.id;
+    if (app.has(socketId)) {
+      const socketData = app.get(socketId);
+
+      if (!socketData.isAuth) {
+        socket.emit(SocketIoEvent.SINGLE_CHAT, 'Not Authorised');
+        return;
+      }
+    }
+
     logger.debug('booksmeet:singleChat:singleChat:data:: %o', JSON.stringify(data));
 
     socketValidator.singleChatValidator(data, socket);
@@ -27,11 +37,15 @@ const singleChat = (app, socket) => (data) => {
     const chatServiceInstance = Container.get(ChatService);
     chatServiceInstance.insertChat(data);
 
-    for (let soc of app) {
-      const toUserId = soc.userdata._id;
-      if (toUserId.toString() === data.to) {
-        console.log('send ---> ');
+    console.log('map ---> ', app);
+
+    for (let [, soc] of app) {
+      const toUserId = soc.userId;
+      logger.debug('booksmeet:singleChat:singleChat:toUserId:: %o', { toUserId });
+
+      if (toUserId && toUserId === data.to) {
         soc.socket.emit(SocketIoEvent.SINGLE_CHAT, data.message);
+        logger.debug('booksmeet:singleChat:singleChat:toUserId: send complete %o', { toUserId });
       }
     }
   } catch (error) {
