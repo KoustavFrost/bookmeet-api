@@ -5,6 +5,8 @@ import { isArray } from 'lodash';
 import { performance, PerformanceObserver } from 'perf_hooks';
 let observer = null;
 import sharp from 'sharp';
+import S3 from 'aws-sdk/clients/s3';
+import config from '../config';
 
 export default class CommonService {
   initiatePerformanceLogger() {
@@ -143,5 +145,24 @@ export default class CommonService {
     } catch (error) {
       logger.error('Error resizing image: %o', error);
     }
+  }
+
+  public async S3ImageUpload(imageBuffer: Buffer, imageName: string) {
+    const logger: Logger = Container.get('logger');
+    const s3: S3 = Container.get('s3');
+
+    logger.info('booksmeet:commonService:S3ImageUpload: starting image upload');
+    const params: S3.PutObjectRequest = {
+      Bucket: config.s3ImgBucket,
+      Key: imageName,
+      Body: imageBuffer,
+    };
+    return new Promise<S3.ManagedUpload.SendData>((resolve, reject) => {
+      s3.upload(params, (s3Err, data) => {
+        logger.info('booksmeet:commonService:S3ImageUpload: end image upload');
+        if (s3Err) return reject(s3Err);
+        resolve(data);
+      });
+    });
   }
 }

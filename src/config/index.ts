@@ -41,4 +41,10 @@ export default {
   },
 
   imageUrl: process.env.IMAGE_URL || 'https://localhost:3000/',
+
+  // AWS Credentials
+  awsSecretKey: process.env.AWS_SECRET_KEY,
+  awsAccesskey: process.env.AWS_ACCESS_KEY,
+  s3ImgBucket: process.env.S3_BUCKET_NAME,
+  s3BucketUrl: process.env.S3_BUCKET_URL,
 };

@@ -61,12 +61,13 @@ export default (app: Router) => {
       try {
         const userServiceInstance = Container.get(UserService);
         const { name, phoneNo, state } = req.body;
+        console.log('files --------> ', req.files[0]);
         const { user, message } = await userServiceInstance.updateUser(
           req.currentUser,
           name,
           phoneNo,
           state,
-          req.files[0] ? req.files[0].path : '',
+          req.files[0] ? req.files[0] : '',
         );
         return res.status(201).json({ user, message });
       } catch (e) {
