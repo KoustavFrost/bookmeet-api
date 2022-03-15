@@ -62,9 +62,10 @@ export default class UserService extends CommonService {
     name: string,
     phoneNo: string,
     state: string,
-    imagePath: string,
+    imagePath: any,
   ): Promise<{ user: IUser; message: string }> {
     try {
+      this.logger.info('booksmeet:user:updateUser:Updating the userdata');
       let user = await this.userModel.findById(currentUser._id);
 
       if (!user) {
@@ -76,7 +77,11 @@ export default class UserService extends CommonService {
       if (name) user.name = name;
       if (phoneNo) user.phoneNo = phoneNo;
       if (state) user.location.state = state;
-      if (imagePath) user.image = imagePath; // For now images are kept in local
+      if (imagePath) {
+        const resizedImgBuffer = await this.resizeImage(imagePath);
+        const uplaodedFile = await this.S3ImageUpload(resizedImgBuffer, imagePath.filename);
+        user.image = uplaodedFile.Location;
+      }
       if (!user.hasUpdatedProfile) user.hasUpdatedProfile = true;
 
       await user.save();
@@ -86,7 +91,6 @@ export default class UserService extends CommonService {
       this.logger.error(error);
       throw error;
     }
-    return;
   }
 
   public async removeProfileImage(currentUser: IUser): Promise<{ message: string }> {

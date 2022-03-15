@@ -3,6 +3,8 @@ import { Container } from 'typedi';
 import LoggerInstance from './logger';
 import * as admin from 'firebase-admin';
 const serviceAccount = require('../../serviceAccount.json');
+import S3 from 'aws-sdk/clients/s3';
+import config from '../config';
 
 export default async ({ models }: { models: { name: string; model: any }[] }): Promise<any> => {
   try {
@@ -20,6 +22,13 @@ export default async ({ models }: { models: { name: string; model: any }[] }): P
     Container.set('privateJWTRS256Key', privateJWTRS256Key);
     Container.set('publicJWTRS256Key', publicJWTRS256Key);
     Container.set('firebaseAdmin', app);
+
+    const s3 = new S3({
+      accessKeyId: config.awsAccesskey,
+      secretAccessKey: config.awsSecretKey,
+    });
+
+    Container.set('s3', s3);
 
     Container.set('logger', LoggerInstance);
   } catch (e) {
