@@ -33,6 +33,7 @@
   "dependencies": {
     "argon2": "^0.28.2",
     "axios": "^0.21.1",
+    "aws-sdk": "^2.1093.0",
     "celebrate": "^15.0.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.4",
