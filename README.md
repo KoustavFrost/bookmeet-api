@@ -1,5 +1,7 @@
 # bookmeet-api
 
+## We found out that there is no market for an app like this. So we stopped out development. 
+
 ## Installation
 
 Use `node` version >= `16.x`
@@ -36,11 +38,6 @@ npm run start
 
 It uses nodemon for livereloading ✌🏻
 
-**If u see errors regarding python then run**
-
-```
-npm install --global --production windows-build-tools --vs2015
-```
 
 ## React Frontend for bookmeet : [Link](https://github.com/Mnak256/bookmeet-ui)
 

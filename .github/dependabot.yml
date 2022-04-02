@@ -1,24 +1,24 @@
-version: 2
-updates:
-- package-ecosystem: npm
-  directory: "/"
-  schedule:
-    interval: monthly
-    time: "23:30"
-  open-pull-requests-limit: 10
-  target-branch: dev
-  ignore:
-  - dependency-name: eslint
-    versions:
-    - 7.19.0
-    - 7.21.0
-  - dependency-name: "@typescript-eslint/eslint-plugin"
-    versions:
-    - 4.14.2
-    - 4.16.1
-  - dependency-name: celebrate
-    versions:
-    - 13.0.4
-  - dependency-name: argon2
-    versions:
-    - 0.27.1
+# version: 2
+# updates:
+# - package-ecosystem: npm
+#   directory: "/"
+#   schedule:
+#     interval: monthly
+#     time: "23:30"
+#   open-pull-requests-limit: 10
+#   target-branch: dev
+#   ignore:
+#   - dependency-name: eslint
+#     versions:
+#     - 7.19.0
+#     - 7.21.0
+#   - dependency-name: "@typescript-eslint/eslint-plugin"
+#     versions:
+#     - 4.14.2
+#     - 4.16.1
+#   - dependency-name: celebrate
+#     versions:
+#     - 13.0.4
+#   - dependency-name: argon2
+#     versions:
+#     - 0.27.1
