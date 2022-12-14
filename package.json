@@ -42,7 +42,7 @@
     "errorhandler": "^1.5.0",
     "event-dispatch": "^0.4.1",
     "eventemitter3": "^4.0.4",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "express-jwt": "^6.0.0",
     "firebase-admin": "^10.0.0",
     "i18next": "^20.2.3",
